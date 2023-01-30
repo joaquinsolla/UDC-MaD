@@ -1,0 +1,882 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Es.Udc.DotNet.PracticaMaD.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BankCard">
+          <Key>
+            <PropertyRef Name="cardPAN" />
+          </Key>
+          <Property Name="cardPAN" Type="bigint" Nullable="false" />
+          <Property Name="cardTypeId" Type="bigint" Nullable="false" />
+          <Property Name="cardCvv" Type="bigint" Nullable="false" />
+          <Property Name="cardExpirationDate" Type="date" Nullable="false" />
+          <Property Name="cardDefault" Type="bit" Nullable="false" />
+          <Property Name="cardOwnerId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BankCardType">
+          <Key>
+            <PropertyRef Name="typeId" />
+          </Key>
+          <Property Name="typeId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="typeName" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="proId" />
+          </Key>
+          <Property Name="proId" Type="bigint" Nullable="false" />
+          <Property Name="bookISBN" Type="varchar" MaxLength="17" Nullable="false" />
+          <Property Name="bookEditorial" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="bookEdition" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="bookPages" Type="bigint" Nullable="false" />
+          <Property Name="bookReleaseDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="catName" />
+          </Key>
+          <Property Name="catName" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="commentId" />
+          </Key>
+          <Property Name="commentId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="proId" Type="bigint" Nullable="false" />
+          <Property Name="usrId" Type="bigint" Nullable="false" />
+          <Property Name="commentText" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="commentDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comment_Tag">
+          <Key>
+            <PropertyRef Name="commentId" />
+            <PropertyRef Name="tagName" />
+          </Key>
+          <Property Name="commentId" Type="bigint" Nullable="false" />
+          <Property Name="tagName" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Film">
+          <Key>
+            <PropertyRef Name="proId" />
+          </Key>
+          <Property Name="proId" Type="bigint" Nullable="false" />
+          <Property Name="filmDirector" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="filmGenre" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="filmRating" Type="bigint" Nullable="false" />
+          <Property Name="filmDurationMins" Type="bigint" Nullable="false" />
+          <Property Name="filmReleaseDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Music">
+          <Key>
+            <PropertyRef Name="proId" />
+          </Key>
+          <Property Name="proId" Type="bigint" Nullable="false" />
+          <Property Name="musicArtist" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="musicAlbum" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="musicSongs" Type="bigint" Nullable="false" />
+          <Property Name="musicDurationMins" Type="bigint" Nullable="false" />
+          <Property Name="musicReleaseDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderLine">
+          <Key>
+            <PropertyRef Name="lineId" />
+          </Key>
+          <Property Name="lineId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lineOrderId" Type="bigint" Nullable="false" />
+          <Property Name="lineProductId" Type="bigint" Nullable="false" />
+          <Property Name="lineUnitaryPrice" Type="decimal" Precision="11" Scale="2" Nullable="false" />
+          <Property Name="lineQuantity" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="proId" />
+          </Key>
+          <Property Name="proId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="proName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="proPrice" Type="decimal" Precision="11" Scale="2" Nullable="false" />
+          <Property Name="proReleaseDate" Type="date" Nullable="false" />
+          <Property Name="proStock" Type="bigint" Nullable="false" />
+          <Property Name="proCatName" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="tagName" />
+          </Key>
+          <Property Name="tagName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="tagShows" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserOrder">
+          <Key>
+            <PropertyRef Name="orderId" />
+          </Key>
+          <Property Name="orderId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="orderDate" Type="date" Nullable="false" />
+          <Property Name="orderBankCardPAN" Type="bigint" Nullable="false" />
+          <Property Name="orderPostalAddress" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="orderValue" Type="decimal" Precision="11" Scale="2" Nullable="false" />
+          <Property Name="orderUserId" Type="bigint" Nullable="false" />
+          <Property Name="orderDescription" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="usrId" />
+          </Key>
+          <Property Name="usrId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="loginName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="enPassword" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="firstName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="lastName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="postalAddress" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="language" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="country" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="admin" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BankCard_CardOwnerId">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BankCard" Type="Self.BankCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="usrId" />
+            </Principal>
+            <Dependent Role="BankCard">
+              <PropertyRef Name="cardOwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BankCard_CardTypeId">
+          <End Role="BankCardType" Type="Self.BankCardType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BankCard" Type="Self.BankCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankCardType">
+              <PropertyRef Name="typeId" />
+            </Principal>
+            <Dependent Role="BankCard">
+              <PropertyRef Name="cardTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Book_ProId">
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="proId" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="proId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_ProductId">
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="proId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="proId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Tag_CommentId">
+          <End Role="Comment" Type="Self.Comment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Comment_Tag" Type="Self.Comment_Tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comment">
+              <PropertyRef Name="commentId" />
+            </Principal>
+            <Dependent Role="Comment_Tag">
+              <PropertyRef Name="commentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Tag_TagName">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Comment_Tag" Type="Self.Comment_Tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="tagName" />
+            </Principal>
+            <Dependent Role="Comment_Tag">
+              <PropertyRef Name="tagName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_UserId">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="usrId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="usrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Film_ProId">
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="proId" />
+            </Principal>
+            <Dependent Role="Film">
+              <PropertyRef Name="proId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Music_ProId">
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Music" Type="Self.Music" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="proId" />
+            </Principal>
+            <Dependent Role="Music">
+              <PropertyRef Name="proId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderLine_LineOrderId">
+          <End Role="UserOrder" Type="Self.UserOrder" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderLine" Type="Self.OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserOrder">
+              <PropertyRef Name="orderId" />
+            </Principal>
+            <Dependent Role="OrderLine">
+              <PropertyRef Name="lineOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderLine_LineProductId">
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderLine" Type="Self.OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="proId" />
+            </Principal>
+            <Dependent Role="OrderLine">
+              <PropertyRef Name="lineProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product">
+          <End Role="Category" Type="Self.Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="catName" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="proCatName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserOrder_OrderBankCardPAN">
+          <End Role="BankCard" Type="Self.BankCard" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserOrder" Type="Self.UserOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankCard">
+              <PropertyRef Name="cardPAN" />
+            </Principal>
+            <Dependent Role="UserOrder">
+              <PropertyRef Name="orderBankCardPAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserOrder_OrderUserId">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="UserOrder" Type="Self.UserOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="usrId" />
+            </Principal>
+            <Dependent Role="UserOrder">
+              <PropertyRef Name="orderUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EsUdcDotNetPracticaMaDStoreContainer">
+          <EntitySet Name="BankCard" EntityType="Self.BankCard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BankCardType" EntityType="Self.BankCardType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comment_Tag" EntityType="Self.Comment_Tag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Film" EntityType="Self.Film" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Music" EntityType="Self.Music" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderLine" EntityType="Self.OrderLine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserOrder" EntityType="Self.UserOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BankCard_CardOwnerId" Association="Self.FK_BankCard_CardOwnerId">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="BankCard" EntitySet="BankCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BankCard_CardTypeId" Association="Self.FK_BankCard_CardTypeId">
+            <End Role="BankCardType" EntitySet="BankCardType" />
+            <End Role="BankCard" EntitySet="BankCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Book_ProId" Association="Self.FK_Book_ProId">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_ProductId" Association="Self.FK_Comment_ProductId">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Tag_CommentId" Association="Self.FK_Comment_Tag_CommentId">
+            <End Role="Comment" EntitySet="Comment" />
+            <End Role="Comment_Tag" EntitySet="Comment_Tag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Tag_TagName" Association="Self.FK_Comment_Tag_TagName">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="Comment_Tag" EntitySet="Comment_Tag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_UserId" Association="Self.FK_Comment_UserId">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Film_ProId" Association="Self.FK_Film_ProId">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Film" EntitySet="Film" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Music_ProId" Association="Self.FK_Music_ProId">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Music" EntitySet="Music" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderLine_LineOrderId" Association="Self.FK_OrderLine_LineOrderId">
+            <End Role="UserOrder" EntitySet="UserOrder" />
+            <End Role="OrderLine" EntitySet="OrderLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderLine_LineProductId" Association="Self.FK_OrderLine_LineProductId">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="OrderLine" EntitySet="OrderLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product" Association="Self.FK_Product">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserOrder_OrderBankCardPAN" Association="Self.FK_UserOrder_OrderBankCardPAN">
+            <End Role="BankCard" EntitySet="BankCard" />
+            <End Role="UserOrder" EntitySet="UserOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserOrder_OrderUserId" Association="Self.FK_UserOrder_OrderUserId">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="UserOrder" EntitySet="UserOrder" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Es.Udc.DotNet.PracticaMaD" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BankCard">
+          <Key>
+            <PropertyRef Name="cardPAN" />
+          </Key>
+          <Property Name="cardPAN" Type="Int64" Nullable="false" />
+          <Property Name="cardTypeId" Type="Int64" Nullable="false" />
+          <Property Name="cardCvv" Type="Int64" Nullable="false" />
+          <Property Name="cardExpirationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="cardDefault" Type="Boolean" Nullable="false" />
+          <Property Name="cardOwnerId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.FK_BankCard_CardOwnerId" FromRole="BankCard" ToRole="UserProfile" />
+          <NavigationProperty Name="BankCardType" Relationship="Self.FK_BankCard_CardTypeId" FromRole="BankCard" ToRole="BankCardType" />
+          <NavigationProperty Name="UserOrders" Relationship="Self.FK_UserOrder_OrderBankCardPAN" FromRole="BankCard" ToRole="UserOrder" />
+        </EntityType>
+        <EntityType Name="BankCardType">
+          <Key>
+            <PropertyRef Name="typeId" />
+          </Key>
+          <Property Name="typeId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="typeName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="BankCards" Relationship="Self.FK_BankCard_CardTypeId" FromRole="BankCardType" ToRole="BankCard" />
+        </EntityType>
+        <EntityType Name="Book" BaseType="Es.Udc.DotNet.PracticaMaD.Product">
+          <Property Name="bookISBN" Type="String" MaxLength="17" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bookEditorial" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bookEdition" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bookPages" Type="Int64" Nullable="false" />
+          <Property Name="bookReleaseDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="catName" />
+          </Key>
+          <Property Name="catName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Product" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="commentId" />
+          </Key>
+          <Property Name="commentId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="proId" Type="Int64" Nullable="false" />
+          <Property Name="usrId" Type="Int64" Nullable="false" />
+          <Property Name="commentText" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="commentDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Comment_ProductId" FromRole="Comment" ToRole="Product" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.FK_Comment_UserId" FromRole="Comment" ToRole="UserProfile" />
+          <NavigationProperty Name="Tags" Relationship="Self.Comment_Tag" FromRole="Comment" ToRole="Tag" />
+        </EntityType>
+        <EntityType Name="Film" BaseType="Es.Udc.DotNet.PracticaMaD.Product">
+          <Property Name="filmDirector" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="filmGenre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="filmRating" Type="Int64" Nullable="false" />
+          <Property Name="filmDurationMins" Type="Int64" Nullable="false" />
+          <Property Name="filmReleaseDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="Music" BaseType="Es.Udc.DotNet.PracticaMaD.Product">
+          <Property Name="musicArtist" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="musicAlbum" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="musicSongs" Type="Int64" Nullable="false" />
+          <Property Name="musicDurationMins" Type="Int64" Nullable="false" />
+          <Property Name="musicReleaseDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="OrderLine">
+          <Key>
+            <PropertyRef Name="lineId" />
+          </Key>
+          <Property Name="lineId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lineOrderId" Type="Int64" Nullable="false" />
+          <Property Name="lineProductId" Type="Int64" Nullable="false" />
+          <Property Name="lineUnitaryPrice" Type="Decimal" Precision="11" Scale="2" Nullable="false" />
+          <Property Name="lineQuantity" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="UserOrder" Relationship="Self.FK_OrderLine_LineOrderId" FromRole="OrderLine" ToRole="UserOrder" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_OrderLine_LineProductId" FromRole="OrderLine" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="proId" />
+          </Key>
+          <Property Name="proId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="proName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="proPrice" Type="Decimal" Precision="11" Scale="2" Nullable="false" />
+          <Property Name="proReleaseDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="proStock" Type="Int64" Nullable="false" />
+          <Property Name="proCatName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Product" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_ProductId" FromRole="Product" ToRole="Comment" />
+          <NavigationProperty Name="OrderLines" Relationship="Self.FK_OrderLine_LineProductId" FromRole="Product" ToRole="OrderLine" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="tagName" />
+          </Key>
+          <Property Name="tagName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tagShows" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Comments" Relationship="Self.Comment_Tag" FromRole="Tag" ToRole="Comment" />
+        </EntityType>
+        <EntityType Name="UserOrder">
+          <Key>
+            <PropertyRef Name="orderId" />
+          </Key>
+          <Property Name="orderId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="orderDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="orderBankCardPAN" Type="Int64" Nullable="false" />
+          <Property Name="orderPostalAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="orderValue" Type="Decimal" Precision="11" Scale="2" Nullable="false" />
+          <Property Name="orderUserId" Type="Int64" Nullable="false" />
+          <Property Name="orderDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="BankCard" Relationship="Self.FK_UserOrder_OrderBankCardPAN" FromRole="UserOrder" ToRole="BankCard" />
+          <NavigationProperty Name="OrderLines" Relationship="Self.FK_OrderLine_LineOrderId" FromRole="UserOrder" ToRole="OrderLine" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.FK_UserOrder_OrderUserId" FromRole="UserOrder" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="usrId" />
+          </Key>
+          <Property Name="usrId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="loginName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="enPassword" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="postalAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="language" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="country" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="admin" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BankCards" Relationship="Self.FK_BankCard_CardOwnerId" FromRole="UserProfile" ToRole="BankCard" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_UserId" FromRole="UserProfile" ToRole="Comment" />
+          <NavigationProperty Name="UserOrders" Relationship="Self.FK_UserOrder_OrderUserId" FromRole="UserProfile" ToRole="UserOrder" />
+        </EntityType>
+        <Association Name="FK_BankCard_CardOwnerId">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BankCard" Type="Self.BankCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="usrId" />
+            </Principal>
+            <Dependent Role="BankCard">
+              <PropertyRef Name="cardOwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BankCard_CardTypeId">
+          <End Role="BankCardType" Type="Self.BankCardType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BankCard" Type="Self.BankCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankCardType">
+              <PropertyRef Name="typeId" />
+            </Principal>
+            <Dependent Role="BankCard">
+              <PropertyRef Name="cardTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserOrder_OrderBankCardPAN">
+          <End Role="BankCard" Type="Self.BankCard" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserOrder" Type="Self.UserOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankCard">
+              <PropertyRef Name="cardPAN" />
+            </Principal>
+            <Dependent Role="UserOrder">
+              <PropertyRef Name="orderBankCardPAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product">
+          <End Role="Category" Type="Self.Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="catName" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="proCatName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_ProductId">
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="proId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="proId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_UserId">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="usrId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="usrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderLine_LineOrderId">
+          <End Role="UserOrder" Type="Self.UserOrder" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderLine" Type="Self.OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserOrder">
+              <PropertyRef Name="orderId" />
+            </Principal>
+            <Dependent Role="OrderLine">
+              <PropertyRef Name="lineOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderLine_LineProductId">
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderLine" Type="Self.OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="proId" />
+            </Principal>
+            <Dependent Role="OrderLine">
+              <PropertyRef Name="lineProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserOrder_OrderUserId">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="UserOrder" Type="Self.UserOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="usrId" />
+            </Principal>
+            <Dependent Role="UserOrder">
+              <PropertyRef Name="orderUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Comment_Tag">
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <End Role="Tag" Type="Self.Tag" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="shoppingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BankCards" EntityType="Self.BankCard" />
+          <EntitySet Name="BankCardTypes" EntityType="Self.BankCardType" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Comments" EntityType="Self.Comment" />
+          <EntitySet Name="OrderLines" EntityType="Self.OrderLine" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Tags" EntityType="Self.Tag" />
+          <EntitySet Name="UserOrders" EntityType="Self.UserOrder" />
+          <EntitySet Name="UserProfiles" EntityType="Self.UserProfile" />
+          <AssociationSet Name="FK_BankCard_CardOwnerId" Association="Self.FK_BankCard_CardOwnerId">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="BankCard" EntitySet="BankCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BankCard_CardTypeId" Association="Self.FK_BankCard_CardTypeId">
+            <End Role="BankCardType" EntitySet="BankCardTypes" />
+            <End Role="BankCard" EntitySet="BankCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserOrder_OrderBankCardPAN" Association="Self.FK_UserOrder_OrderBankCardPAN">
+            <End Role="BankCard" EntitySet="BankCards" />
+            <End Role="UserOrder" EntitySet="UserOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product" Association="Self.FK_Product">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_ProductId" Association="Self.FK_Comment_ProductId">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_UserId" Association="Self.FK_Comment_UserId">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderLine_LineOrderId" Association="Self.FK_OrderLine_LineOrderId">
+            <End Role="UserOrder" EntitySet="UserOrders" />
+            <End Role="OrderLine" EntitySet="OrderLines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderLine_LineProductId" Association="Self.FK_OrderLine_LineProductId">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="OrderLine" EntitySet="OrderLines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserOrder_OrderUserId" Association="Self.FK_UserOrder_OrderUserId">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="UserOrder" EntitySet="UserOrders" />
+          </AssociationSet>
+          <AssociationSet Name="Comment_Tag" Association="Self.Comment_Tag">
+            <End Role="Comment" EntitySet="Comments" />
+            <End Role="Tag" EntitySet="Tags" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EsUdcDotNetPracticaMaDStoreContainer" CdmEntityContainer="shoppingEntities">
+          <EntitySetMapping Name="BankCards">
+            <EntityTypeMapping TypeName="Es.Udc.DotNet.PracticaMaD.BankCard">
+              <MappingFragment StoreEntitySet="BankCard">
+                <ScalarProperty Name="cardPAN" ColumnName="cardPAN" />
+                <ScalarProperty Name="cardTypeId" ColumnName="cardTypeId" />
+                <ScalarProperty Name="cardCvv" ColumnName="cardCvv" />
+                <ScalarProperty Name="cardExpirationDate" ColumnName="cardExpirationDate" />
+                <ScalarProperty Name="cardDefault" ColumnName="cardDefault" />
+                <ScalarProperty Name="cardOwnerId" ColumnName="cardOwnerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankCardTypes">
+            <EntityTypeMapping TypeName="Es.Udc.DotNet.PracticaMaD.BankCardType">
+              <MappingFragment StoreEntitySet="BankCardType">
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+                <ScalarProperty Name="typeName" ColumnName="typeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="Es.Udc.DotNet.PracticaMaD.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="catName" ColumnName="catName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="Es.Udc.DotNet.PracticaMaD.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="commentId" ColumnName="commentId" />
+                <ScalarProperty Name="proId" ColumnName="proId" />
+                <ScalarProperty Name="usrId" ColumnName="usrId" />
+                <ScalarProperty Name="commentText" ColumnName="commentText" />
+                <ScalarProperty Name="commentDate" ColumnName="commentDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderLines">
+            <EntityTypeMapping TypeName="Es.Udc.DotNet.PracticaMaD.OrderLine">
+              <MappingFragment StoreEntitySet="OrderLine">
+                <ScalarProperty Name="lineId" ColumnName="lineId" />
+                <ScalarProperty Name="lineOrderId" ColumnName="lineOrderId" />
+                <ScalarProperty Name="lineProductId" ColumnName="lineProductId" />
+                <ScalarProperty Name="lineUnitaryPrice" ColumnName="lineUnitaryPrice" />
+                <ScalarProperty Name="lineQuantity" ColumnName="lineQuantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="IsTypeOf(Es.Udc.DotNet.PracticaMaD.Product)">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="proId" ColumnName="proId" />
+                <ScalarProperty Name="proCatName" ColumnName="proCatName" />
+                <ScalarProperty Name="proStock" ColumnName="proStock" />
+                <ScalarProperty Name="proReleaseDate" ColumnName="proReleaseDate" />
+                <ScalarProperty Name="proPrice" ColumnName="proPrice" />
+                <ScalarProperty Name="proName" ColumnName="proName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(Es.Udc.DotNet.PracticaMaD.Book)">
+              <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="proId" ColumnName="proId" />
+                <ScalarProperty Name="bookReleaseDate" ColumnName="bookReleaseDate" />
+                <ScalarProperty Name="bookPages" ColumnName="bookPages" />
+                <ScalarProperty Name="bookEdition" ColumnName="bookEdition" />
+                <ScalarProperty Name="bookEditorial" ColumnName="bookEditorial" />
+                <ScalarProperty Name="bookISBN" ColumnName="bookISBN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(Es.Udc.DotNet.PracticaMaD.Film)">
+              <MappingFragment StoreEntitySet="Film">
+                <ScalarProperty Name="proId" ColumnName="proId" />
+                <ScalarProperty Name="filmReleaseDate" ColumnName="filmReleaseDate" />
+                <ScalarProperty Name="filmDurationMins" ColumnName="filmDurationMins" />
+                <ScalarProperty Name="filmRating" ColumnName="filmRating" />
+                <ScalarProperty Name="filmGenre" ColumnName="filmGenre" />
+                <ScalarProperty Name="filmDirector" ColumnName="filmDirector" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(Es.Udc.DotNet.PracticaMaD.Music)">
+              <MappingFragment StoreEntitySet="Music">
+                <ScalarProperty Name="proId" ColumnName="proId" />
+                <ScalarProperty Name="musicReleaseDate" ColumnName="musicReleaseDate" />
+                <ScalarProperty Name="musicDurationMins" ColumnName="musicDurationMins" />
+                <ScalarProperty Name="musicSongs" ColumnName="musicSongs" />
+                <ScalarProperty Name="musicAlbum" ColumnName="musicAlbum" />
+                <ScalarProperty Name="musicArtist" ColumnName="musicArtist" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="Es.Udc.DotNet.PracticaMaD.Tag">
+              <MappingFragment StoreEntitySet="Tag">
+                <ScalarProperty Name="tagName" ColumnName="tagName" />
+                <ScalarProperty Name="tagShows" ColumnName="tagShows" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserOrders">
+            <EntityTypeMapping TypeName="Es.Udc.DotNet.PracticaMaD.UserOrder">
+              <MappingFragment StoreEntitySet="UserOrder">
+                <ScalarProperty Name="orderId" ColumnName="orderId" />
+                <ScalarProperty Name="orderDate" ColumnName="orderDate" />
+                <ScalarProperty Name="orderBankCardPAN" ColumnName="orderBankCardPAN" />
+                <ScalarProperty Name="orderPostalAddress" ColumnName="orderPostalAddress" />
+                <ScalarProperty Name="orderValue" ColumnName="orderValue" />
+                <ScalarProperty Name="orderUserId" ColumnName="orderUserId" />
+                <ScalarProperty Name="orderDescription" ColumnName="orderDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="Es.Udc.DotNet.PracticaMaD.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="usrId" ColumnName="usrId" />
+                <ScalarProperty Name="loginName" ColumnName="loginName" />
+                <ScalarProperty Name="enPassword" ColumnName="enPassword" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="postalAddress" ColumnName="postalAddress" />
+                <ScalarProperty Name="language" ColumnName="language" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="admin" ColumnName="admin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Comment_Tag" TypeName="Es.Udc.DotNet.PracticaMaD.Comment_Tag" StoreEntitySet="Comment_Tag">
+            <EndProperty Name="Comment">
+              <ScalarProperty Name="commentId" ColumnName="commentId" />
+            </EndProperty>
+            <EndProperty Name="Tag">
+              <ScalarProperty Name="tagName" ColumnName="tagName" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

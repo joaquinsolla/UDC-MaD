@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Es.Udc.DotNet.PracticaMaD.Web.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="PracticaMaD_defaultCount" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="ObjectDS_ProductComments_Service" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Es.Udc.DotNet.PracticaMaD.Model.Services.CatalogService.ICatalogService</Value>
+    </Setting>
+    <Setting Name="ObjectDS_ProductComments_SelectMethod" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">FindCommentsByProduct</Value>
+    </Setting>
+    <Setting Name="ObjectDS_ProductComments_CountMethod" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">GetNumberOfProductComments</Value>
+    </Setting>
+    <Setting Name="ObjectDS_ProductComments_StartIndexParameter" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">startIndex</Value>
+    </Setting>
+    <Setting Name="ObjectDS_ProductComments_CountParameter" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">count</Value>
+    </Setting>
+    <Setting Name="PracticaMaD_applicationURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/PracticaMaD</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

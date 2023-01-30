@@ -1,0 +1,85 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="PracticaMaD.master.cs"
+    Inherits="Es.Udc.DotNet.PracticaMaD.Web.PracticaMaD" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>PracticaMaD</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="~/Css/Styles.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+     <div id="window">
+        <!-- Page title. -->
+        <div id="pageTitle">
+            <asp:Localize ID="lclPageTitleMaster" runat="server" Text="<%$Resources: , lclPageTitleMasterRes %>" />
+        </div>
+
+        <!-- Body Header. -->
+        <div id="header" align="left">
+            <asp:Label ID="lblMainTitle" runat="server" Font-Bold="True" Text="<%$Resources: , lblMainTitleRes %>" Font-Size="X-Large"></asp:Label>
+        </div>
+
+        <span id="menuLinks">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolderLinks" runat="server">
+                <asp:HyperLink ID="lnkFindProducts" runat="server"
+                    NavigateUrl="~/Pages/Catalog/FindProducts.aspx"
+                    Text="<%$ Resources:, lnkFindProductsRes %>" ForeColor="#0033CC" />
+                <label>&nbsp&nbsp</label>
+                <asp:HyperLink ID="lnkCart" runat="server"
+                    NavigateUrl="~/Pages/Shopping/ShoppingCartDetails.aspx"
+                    Text="<%$ Resources:, lnkCartRes %>" ForeColor="#0033CC" />
+                <label>&nbsp&nbsp</label>
+                <asp:HyperLink ID="lnkMyProfile" runat="server"
+                    Text="<%$ Resources:, lnkMyProfileRes %>" ForeColor="#0033CC"    
+                    NavigateUrl="~/Pages/User/MyProfile.aspx"/>
+                <asp:HyperLink ID="lnkAuthentication" runat="server"
+                    NavigateUrl="~/Pages/User/Authentication.aspx"
+                    Text="<%$ Resources:, lnkAuthenticationRes %>" ForeColor="#0033CC" />
+                <label>&nbsp&nbsp</label>
+                <asp:HyperLink ID="lnkMyOrders" runat="server"
+                    Text="<%$ Resources:, lnkMyOrdersRes %>" ForeColor="#0033CC" 
+                    NavigateUrl="~/Pages/User/MyOrders.aspx"/>
+                <label>&nbsp&nbsp</label>
+                <asp:HyperLink ID="lnkLogout" runat="server"
+                    NavigateUrl="~/Pages/User/Logout.aspx"
+                    Text="<%$ Resources:, lnkLogoutRes %>" ForeColor="#0033CC" />
+                <label>&nbsp&nbsp</label>
+                <asp:HyperLink ID="lnkTagCloud" runat="server"
+                    NavigateUrl="~/Pages/Catalog/TagCloud.aspx"
+                    Text="<%$ Resources:, lnkTagCloudRes %>" ForeColor="#0033CC" />
+                <label>&nbsp&nbsp</label>
+            </asp:ContentPlaceHolder>
+        </span>
+        
+
+        <!-- Main Content. -->
+        <div id="pageBody">
+
+            <div id="headContent">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolderHead" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+
+            <div id="mainContent">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolderMain" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+
+            <div id="footContent">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolderFoot" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+
+        </div>
+
+        <!-- Footer. -->
+        <div id="footer">
+            <asp:Localize ID="lclFooter" runat="server"/>
+            <asp:Label ID="lblFooterLabel" runat="server" Text="<%$Resources: , lblFooterLabelRes %>"></asp:Label>
+        </div>
+    </div>
+
+</body>
+
+</html>
